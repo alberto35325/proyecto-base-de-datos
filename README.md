@@ -69,9 +69,10 @@ Clase ID.
 Fecha de Matrícula.
 
 4.-MODELO RACIONAL:
-Para el modelo relacional me fui a draw.io para empezar a hacer el esquema primero defini los atributos principales y luego me puse a meterle en base a el anterior modelo sus subatributos y sus id personalizando con colores, tambien definiendo la relaciones que posen mediante las flechas 
+Para el modelo relacional me fui a draw.io para empezar a hacer el esquema primero defini los atributos principales y luego me puse a meterle en base a el anterior modelo sus subatributos y sus id personalizando con colores, tambien definiendo la relaciones que posen mediante las flechas.
+
 5.-IMPLEMENTACION MYSQL:
-Como ya habia planteado my modelo relacional directamente en mysql workbench no tuve el mayor problema en este punto y solo tuve que sincronizar my modelo.
+Para implementarlo en Mysql me fui a la cracion de modelos y cree mi proyecto de base de datos, luego empeze pasando mi racional a este modelo lo unico en lo que tuve que pensar fue en cuando poner en cada subatributo su calificativo y de que tipo eran, marque los id defini cuando eran not null y cuando no, puse un limite a las palabras que se pueden poner en determinados subatributos y luego cuando my modelo quedo igual lo sincronize y lo traspase a el Mysql normal.
 
 6.-CONSULTAS PROPUESTAS:
 Las consultas que yo voy a proponer va a ser cuatro las cuales no van a ser especialmente conplejas, estas cuatro van a hacer funciones utiles como pueden ser:
