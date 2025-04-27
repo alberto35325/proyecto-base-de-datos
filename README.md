@@ -2,15 +2,25 @@ PROYECTO ESCUELA
                                             
 indice:
 1.-Introduccion.
+
 2.-Anlisis y opinion del enunciado.
+
 3.-Modelo conceptual.
+
 4.-Modelo racional.
+
 5.-Implementacion en Mysql.
+
 6.-Consultas propuestas.
+
 7.-Ampliacion de la base de datos.
+
 8.-Vistas y Triggers.
-9.-Pruebas y Validacion.                                            
+
+9.-Pruebas y Validacion.  
+
 10.-Conclusiones.
+
 11.-Anexos.
                                               
 1.-INTRODUCCION:
