@@ -68,11 +68,8 @@ Estudiante ID.
 Clase ID.
 Fecha de Matrícula.
 
-lo unico es tratar de dejar el modelo conceptual lo mas limpio posible.
-
 4.-MODELO RACIONAL:
-Ahora para el modelo racional me fui a mysql y me puse a hacer el modelo como ya tenia marcado sus relaciones no me fue muy dificil solo fue crear las tablas y poner en cada atributo las cosas que nesesitaba, marcando los id de los atributos como auto incrementales poniendo las fechatiempo en datatime, poniendo los varchar con un limite de doscientas palabras de tope y para las mas pequeñas como pueden ser y email y telefono poniendole veinte, solo tueve que unisr las tablas que tenian relacions con las flechitas dandole asi el id alos atributos que lo adquirian.
-
+Para el modelo relacional me fui a draw.io para empezar a hacer el esquema primero defini los atributos principales y luego me puse a meterle en base a el anterior modelo sus subatributos y sus id personalizando con colores, tambien definiendo la relaciones que posen mediante las flechas 
 5.-IMPLEMENTACION MYSQL:
 Como ya habia planteado my modelo relacional directamente en mysql workbench no tuve el mayor problema en este punto y solo tuve que sincronizar my modelo.
 
