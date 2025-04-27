@@ -1,0 +1,41 @@
+CREATE VIEW Vista_Cursos_Estudiantes AS
+SELECT 
+    e.id_estudiante,
+    e.nombre AS nombre_estudiante,
+    e.apellido AS apellido_estudiante,
+    c.nombre_curso,
+    m.año_escolar,
+    cl.fecha,
+    cl.hora
+FROM 
+    Estudiantes e
+JOIN 
+    Matriculas m ON e.id_estudiante = m.id_estudiante
+JOIN 
+    Curso c ON m.año_escolar = c.anio_escolar
+JOIN 
+    Clases cl ON e.id_estudiante = cl.id_estudiante;
+    
+    CREATE VIEW Vista_Clases_Profesores AS
+SELECT 
+    p.id_profesor,
+    p.nombre AS nombre_profesor,
+    p.apellido AS apellido_profesor,
+    c.nombre_curso,
+    c.grado,
+    c.anio_escolar
+FROM 
+    Profesores p
+JOIN 
+    Curso c ON p.id_profesor = c.id_profesor;
+    
+DELIMITER //
+
+CREATE TRIGGER Actualizar_Ultima_Actualizacion
+BEFORE UPDATE ON Estudiantes
+FOR EACH ROW
+BEGIN
+    SET NEW.ultima_actualizacion = NOW();
+END;
+
+//
