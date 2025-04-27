@@ -28,6 +28,7 @@ id_profesor: Identificador del profesor que imparte el curso (clave foránea).
 anio_escolar: Año escolar en el que se imparte el curso.
 Clases
 
+
 4.-Clase
 id_clase: Identificador único de la clase (clave primaria).
 id_estudiante: Identificador del estudiante que asiste a la clase (clave foránea).
@@ -55,3 +56,8 @@ Un curso puede tener múltiples matrículas de estudiantes, lo que establece una
 4.-Clases y Estudiantes:
 Un estudiante puede asistir a múltiples clases, y una clase puede tener múltiples estudiantes, lo que establece una relación de muchos a muchos (N:M) 
 entre Clases y Estudiantes.Esta relación puede requerir una tabla intermedia si se desea modelar explícitamente.
+
+
+Modelo relacional:
+
+https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&dark=auto#G1StXKJuSWczvAoKq5hnbdIERy0t5egIUp
