@@ -1,0 +1,57 @@
+Moelo conceptual:
+
+Estudiantes
+
+1.-Estudiantes
+id_estudiante: Identificador único del estudiante (clave primaria).
+nombre: Nombre del estudiante.
+apellido: Apellido del estudiante.
+fecha_nacimiento: Fecha de nacimiento del estudiante.
+grado: Grado escolar en el que está inscrito el estudiante.
+direccion: Dirección del estudiante.
+telefono: Número de teléfono del estudiante.
+ultima_actualizacion: Fecha y hora de la última actualización de los datos del estudiante.
+
+2.-Profesor
+id_profesor: Identificador único del profesor (clave primaria).
+nombre: Nombre del profesor.
+apellido: Apellido del profesor.
+asignatura: Asignatura que enseña el profesor.
+telefono: Número de teléfono del profesor.
+email: Correo electrónico del profesor.
+
+3.-Curso
+id_curso: Identificador único del curso (clave primaria).
+nombre_curso: Nombre del curso.
+grado: Grado escolar al que corresponde el curso.
+id_profesor: Identificador del profesor que imparte el curso (clave foránea).
+anio_escolar: Año escolar en el que se imparte el curso.
+Clases
+
+4.-Clase
+id_clase: Identificador único de la clase (clave primaria).
+id_estudiante: Identificador del estudiante que asiste a la clase (clave foránea).
+fecha: Fecha en la que se imparte la clase.
+hora: Hora en la que se imparte la clase.
+
+5.-Matricula
+id_matricula: Identificador único de la matrícula (clave primaria).
+id_estudiante: Identificador del estudiante matriculado (clave foránea).
+año_escolar: Año escolar en el que se realiza la matrícula.
+estado: Estado de la matrícula (por ejemplo, "activo", "inactivo").
+fecha_matricula: Fecha en la que se realizó la matrícula.
+
+Las relaciones:
+
+1-Estudiantes y Matriculas
+Un estudiante puede estar matriculado en múltiples cursos, lo que establece una relación de uno a muchos (1:N) entre Estudiantes y Matriculas.
+
+2.-Profesores y Clases:
+Un profesor puede impartir múltiples clases, lo que establece una relación de uno a muchos (1:N) entre Profesores y Clases.
+
+3.-Curso y Matriculas:
+Un curso puede tener múltiples matrículas de estudiantes, lo que establece una relación de uno a muchos (1:N) entre Curso y Matriculas.
+
+4.-Clases y Estudiantes:
+Un estudiante puede asistir a múltiples clases, y una clase puede tener múltiples estudiantes, lo que establece una relación de muchos a muchos (N:M) 
+entre Clases y Estudiantes.Esta relación puede requerir una tabla intermedia si se desea modelar explícitamente.
