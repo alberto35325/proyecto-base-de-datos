@@ -30,43 +30,7 @@ Para este proyecto e tomado la decicion de emplear una base de datos la cual ara
 Ya e leido muchas veces el enunciado y las tareas que tengo que sobrellevar y me parecen bastantes, pero con calma yo creo que lo hare de forma correcta probablemente me la pase revisando la teoria y los ejemplos tratados en clase, pero con el principio no creo q posee mucho problema ya que el modelo conceptual y racional lo lllevo bastante bien y no  me parece muy dificil, luego el implementarlo en Mysql tampoco creo que tarde mucho, con las consultas tardare mas, luego ampliare la base de datos lo cual no creo que sea un problema mas alla de que no se me ocurra datos suficentes, las pruebas y los triggers si quen me preocupan pero ya eso junto  a las pruebas  y validacion serian casi lo ultimo asi que  no tendre prisa y ire poco a poco avanzandolo.
 
 3.-MODELO CONCEPTUAL:
-Como dije antes el modelo conceptual no me preocupa mucho lo unico en lo que tengo que pensar son en las relaciones que poseen mis atributos los cuales no son muy complejos siendo asi como simplemente pensado podemos averiguar relacones como la de estudiante clase, siendo un ejemplo como un estudiante puede estar en multiples clases igual que este un profesor puede impartir multiples clases y un curso puede posser muchas clases asociadas en cambio una clase solo esta en un curso y solo la da un profesor, deduciendo asi facilmente el tipo de relacion entre estos atributos y porsupuesto a cada atributo le añadi datos indispensables como son:
-
-Estudiante
-ID estudiante.
-Nombre.
-Apellido.
-Fecha de Nacimiento.
-Dirección.
-Teléfono.
-Email.
-
-Profesor:
-ID profesor.
-Nombre.
-Apellido.
-Especialidad.
-Teléfono.
-Email.
-
-Curso:
-ID curso.
-Nombre del Curso.
-Descripción.
-Créditos.
-
-Clase:
-ID clase.
-Curso ID.
-Profesor ID.
-Horario.
-Aula.
-
-Matricula:
-ID matricula.
-Estudiante ID.
-Clase ID.
-Fecha de Matrícula.
+Como dije antes el modelo conceptual no me preocupa mucho lo unico en lo que tengo que pensar son en las relaciones que poseen mis atributos los cuales no son muy complejos siendo asi como simplemente pensado podemos averiguar relacones como la de estudiante clase, siendo un ejemplo como un estudiante puede estar en multiples clases igual que este un profesor puede impartir multiples clases y un curso puede posser muchas clases asociadas en cambio una clase solo esta en un curso y solo la da un profesor.
 
 4.-MODELO RACIONAL:
 Para el modelo relacional me fui a draw.io para empezar a hacer el esquema primero defini los atributos principales y luego me puse a meterle en base a el anterior modelo sus subatributos y sus id personalizando con colores, tambien definiendo la relaciones que posen mediante las flechas.
@@ -90,23 +54,15 @@ Agregar una Tabla de Asignaturas:
 
 Asignatura:
 id asignatura (INT, PRIMARY KEY, AUTO_INCREMENT)
-nombreasignatura (VARCHAR(255), NOT NULL)
-id_curso (INT)
-id_profesor (INT)
-
-Calificacion:
-id calificacion (INT, PRIMARY KEY, AUTO_INCREMENT)
-id estudiante (INT)
-id clase (INT)
-calificacion (DECIMAL(5,2))
-fecha_calificacion (DATETIME)
+nombre (VARCHAR(255), NOT NULL)
+descripcion (VARCHAR(255))
 
 Asistencia:
 id asistencia (INT, PRIMARY KEY, AUTO_INCREMENT)
 id estudiante (INT)
 id clase (INT)
 fecha (DATETIME)
-presente (BOOLEAN)
+estado (BOOLEAN)
 
 Podemos ver como cada uno de estos nuevos atributos se relacionan con los anterios atributos para complementarlos.
 
