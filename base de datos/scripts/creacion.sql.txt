@@ -1,46 +1,60 @@
 Moelo conceptual:
 
-Estudiantes
 
-1.-Estudiantes
-id_estudiante: Identificador único del estudiante (clave primaria).
-nombre: Nombre del estudiante.
-apellido: Apellido del estudiante.
-fecha_nacimiento: Fecha de nacimiento del estudiante.
-grado: Grado escolar en el que está inscrito el estudiante.
-direccion: Dirección del estudiante.
-telefono: Número de teléfono del estudiante.
-ultima_actualizacion: Fecha y hora de la última actualización de los datos del estudiante.
+1.-Estudiante:
 
-2.-Profesor
-id_profesor: Identificador único del profesor (clave primaria).
-nombre: Nombre del profesor.
-apellido: Apellido del profesor.
-asignatura: Asignatura que enseña el profesor.
-telefono: Número de teléfono del profesor.
-email: Correo electrónico del profesor.
+id_estudiante
+nombre
+apellido
+fecha_nacimiento
+direccion
+telefono
 
-3.-Curso
-id_curso: Identificador único del curso (clave primaria).
-nombre_curso: Nombre del curso.
-grado: Grado escolar al que corresponde el curso.
-id_profesor: Identificador del profesor que imparte el curso (clave foránea).
-anio_escolar: Año escolar en el que se imparte el curso.
-Clases
+2. Profesor
 
+id_profesor
+nombre
+apellido
+asignatura
+telefono
+email
 
-4.-Clase
-id_clase: Identificador único de la clase (clave primaria).
-id_estudiante: Identificador del estudiante que asiste a la clase (clave foránea).
-fecha: Fecha en la que se imparte la clase.
-hora: Hora en la que se imparte la clase.
+3. Curso
 
-5.-Matricula
-id_matricula: Identificador único de la matrícula (clave primaria).
-id_estudiante: Identificador del estudiante matriculado (clave foránea).
-año_escolar: Año escolar en el que se realiza la matrícula.
-estado: Estado de la matrícula (por ejemplo, "activo", "inactivo").
-fecha_matricula: Fecha en la que se realizó la matrícula.
+id_curso
+nombre_curso
+id_profesor
+anio_escolar
+año escolar
+
+4. Clase
+
+id_clase
+id_estudiante
+fecha
+hora
+
+5. Matricula
+
+id_matricula
+id_estudiante
+anio_escolar
+estado
+fecha_matricula
+
+6. Asignaturas
+
+id_asignatura
+nombre
+descripcion
+
+7. Asistencia
+
+id_asistencia
+id_estudiante
+id_clase
+fecha
+estado
 
 Las relaciones:
 
