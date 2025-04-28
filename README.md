@@ -77,18 +77,19 @@ En conclusion este proyecto de base de datos fue creado en base a una hipotetica
 
 11.-ANEXOS:
 
-CREATE TABLE Estudiantes (
+1:Estudiante
+CREATE TABLE Estudiante (
     id_estudiante INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50),
     apellido VARCHAR(50),
     fecha_nacimiento DATE,
-    grado VARCHAR(10),
     direccion VARCHAR(100),
     telefono VARCHAR(15),
-    ultima_actualizacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    fecha_ultima_actualizacion DATETIME
 );
 
-CREATE TABLE Profesores (
+2.Profesor
+CREATE TABLE Profesor (
     id_profesor INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50),
     apellido VARCHAR(50),
@@ -97,90 +98,104 @@ CREATE TABLE Profesores (
     email VARCHAR(100)
 );
 
+3.:Curso
 CREATE TABLE Curso (
     id_curso INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_curso VARCHAR(100),
-    grado VARCHAR(10),
+    nombre_curso VARCHAR(50),
     id_profesor INT,
-    anio_escolar VARCHAR(10),
-    FOREIGN KEY (id_profesor) REFERENCES Profesores(id_profesor)
+    anio_escolar INT,
+    FOREIGN KEY (id_profesor) REFERENCES Profesor(id_profesor)
 );
 
-CREATE TABLE Clases (
+4. Tabla: Clase
+CREATE TABLE Clase (
     id_clase INT AUTO_INCREMENT PRIMARY KEY,
     id_estudiante INT,
     fecha DATE,
     hora TIME,
-    FOREIGN KEY (id_estudiante) REFERENCES Estudiantes(id_estudiante)
+    id_curso INT,
+    FOREIGN KEY (id_estudiante) REFERENCES Estudiante(id_estudiante),
+    FOREIGN KEY (id_curso) REFERENCES Curso(id_curso)
 );
 
-CREATE TABLE Matriculas (
+5.Matricula:
+CREATE TABLE Matricula (
     id_matricula INT AUTO_INCREMENT PRIMARY KEY,
     id_estudiante INT,
-    año_escolar VARCHAR(10),
+    id_curso INT,
     estado VARCHAR(20),
     fecha_matricula DATE,
-    FOREIGN KEY (id_estudiante) REFERENCES Estudiantes(id_estudiante)
+    FOREIGN KEY (id_estudiante) REFERENCES Estudiante(id_estudiante),
+    FOREIGN KEY (id_curso) REFERENCES Curso(id_curso)
 );
 
-INSERT INTO Estudiantes (nombre, apellido, fecha_nacimiento, grado, direccion, telefono) VALUES
-('Juan', 'Pérez', '2005-05-15', '10', 'Calle Falsa 123', '555-1234'),
-('María', 'López', '2006-08-22', '9', 'Avenida Siempre 456', '555-5678');
+6.Asignaturas:
+CREATE TABLE Asignaturas (
+    id_asignatura INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50),
+    descripcion TEXT
+);
 
-INSERT INTO Profesores (nombre, apellido, asignatura, telefono, email) VALUES
-('Ana', 'García', 'Matemáticas', '555-8765', 'ana@escuela.com'),
-('Luis', 'Martínez', 'Historia', '555-4321', 'luis@escuela.com');
+7. Tabla: Asistencia
+CREATE TABLE Asistencia (
+    id_asistencia INT AUTO_INCREMENT PRIMARY KEY,
+    id_estudiante INT,
+    clave_asignatura INT,
+    fecha DATE,
+    estado VARCHAR(20),
+    FOREIGN KEY (id_estudiante) REFERENCES Estudiante(id_estudiante),
+    FOREIGN KEY (clave_asignatura) REFERENCES Asignaturas(clave_asignatura)
+);
 
-INSERT INTO Curso (nombre_curso, grado, id_profesor, anio_escolar) VALUES
-('Matemáticas Avanzadas', '10', 1, '2023-2024'),
-('Historia Moderna', '9', 2, '2023-2024');
+ 
+1. Vista: Vista_Cursos_Estudiantes
+sql
+Run
+Copy code
+CREATE VIEW Vista_Cursos_Estudiantes AS
+SELECT 
+    e.id_estudiante,
+    e.nombre AS nombre_estudiante,
+    c.id_curso,
+    c.nombre_curso,
+    cl.fecha AS fecha_clase,
+    cl.hora AS hora_clase
+FROM 
+    Matricula m
+JOIN 
+    Clase cl ON m.id_matricula = cl.id_matricula
+JOIN 
+    Curso c ON m.id_curso = c.id_curso
+JOIN 
+    Estudiante e ON m.id_estudiante = e.id_estudiante;
+   
+2. Vista: Vista_Clases_Profesores
+sql
+Run
+Copy code
+CREATE VIEW Vista_Clases_Profesores AS
+SELECT 
+    p.id_profesor,
+    p.nombre AS nombre_profesor,
+    cl.id_clase,
+    cl.fecha AS fecha_clase,
+    cl.hora AS hora_clase
+FROM 
+    Profesor p
+JOIN 
+    Clase cl ON p.id_profesor = cl.id_profesor;
 
-INSERT INTO Clases (id_estudiante, fecha, hora) VALUES
-(1, '2023-09-01', '08:00:00'),
-(2, '2023-09-01', '09:00:00');
-
-INSERT INTO Matriculas (id_estudiante, año_escolar, estado, fecha_matricula) VALUES
-(1, '2023-2024', 'Matriculado', '2023-06-15'),
-(2, '2023-2024', 'Matriculado', '2023-06-20');
-
-ELECT e.nombre, e.apellido
-FROM Estudiantes e
-JOIN Matriculas m ON e.id_estudiante = m.id_estudiante
-JOIN Curso c ON m.año_escolar = c.anio_escolar
-WHERE c.nombre_curso = 'Matemáticas Avanzadas';
-
-SELECT c.nombre_curso, COUNT(m.id_estudiante) AS numero_estudiantes
-FROM Curso c
-LEFT JOIN Matriculas m ON c.anio_escolar = m.año_escolar
-GROUP BY c.nombre_curso;
-
-SELECT p.nombre AS nombre_profesor, p.apellido AS apellido_profesor, c.nombre_curso
-FROM Profesores p
-JOIN Curso c ON p.id_profesor = c.id_profesor;
-
-SELECT c.fecha, c.hora, e.nombre, e.apellido
-FROM Clases c
-JOIN Estudiantes e ON c.id_estudiante = e.id_estudiante
-WHERE c.aula = 'Aula 101'; 
-
-SELECT id_estudiante, nombre, ultima_actualizacion
-FROM Estudiantes
-WHERE id_estudiante = 1; 
+3. Trigger
+Trigger: Actualizar_Fecha_Ultima_Actualizacion
 
 DELIMITER //
 
-CREATE TRIGGER Actualizar_Ultima_Actualizacion
-BEFORE UPDATE ON Estudiantes
+CREATE TRIGGER Actualizar_Fecha_Ultima_Actualizacion
+BEFORE UPDATE ON Estudiante
 FOR EACH ROW
 BEGIN
-    SET NEW.ultima_actualizacion = NOW();
+    SET NEW.fecha_ultima_actualizacion = NOW();
 END;
 //
 
 DELIMITER ;
-
-RANT SELECT ON Estudiantes TO 'usuario'@'localhost';
-GRANT SELECT ON Vista_Cursos_Estudiantes TO 'usuario'@'localhost';
-GRANT SELECT ON Vista_Clases_Profesores TO 'usuario'@'localhost';
-
-GRANT UPDATE ON Estudiantes TO 'usuario'@'localhost';
