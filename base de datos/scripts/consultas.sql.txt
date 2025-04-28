@@ -1,0 +1,48 @@
+CONSULTAS:
+
+1._
+SELECT 
+    s.student_id, 
+    s.student_name 
+FROM 
+    students s 
+JOIN 
+    student_courses sc ON s.student_id = sc.student_id 
+WHERE 
+    sc.course_id = 'ID_DEL_CURSO_ESPECIFICO';
+
+2._
+SELECT 
+    c.class_id, 
+    c.date, 
+    c.time 
+FROM 
+    classes c 
+WHERE 
+    c.classroom_id = 'ID_DEL_AULA_ESPECIFICA';
+
+3.-
+SELECT 
+    t.teacher_id, 
+    t.teacher_name, 
+    c.course_name 
+FROM 
+    teachers t 
+LEFT JOIN 
+    courses c ON t.teacher_id = c.teacher_id 
+ORDER BY 
+    t.teacher_name;
+
+4.-
+SELECT 
+    c.course_id, 
+    c.course_name, 
+    COUNT(sc.student_id) AS number_of_students 
+FROM 
+    courses c 
+LEFT JOIN 
+    student_courses sc ON c.course_id = sc.course_id 
+GROUP BY 
+    c.course_id, 
+    c.course_name;
+    
