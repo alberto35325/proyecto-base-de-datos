@@ -36,9 +36,15 @@ TRIGGER:
 1.-
 ALTER TABLE Estudiante ADD COLUMN fecha_ultima_actualizacion DATETIME;
 
+DELIMITER //
+
 CREATE TRIGGER Actualizar_Fecha_Ultima_Actualizacion
 BEFORE UPDATE ON Estudiante
 FOR EACH ROW
 BEGIN
     SET NEW.fecha_ultima_actualizacion = NOW();
 END;
+
+//
+
+DELIMITER ;
