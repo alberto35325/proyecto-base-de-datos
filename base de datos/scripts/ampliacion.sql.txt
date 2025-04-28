@@ -1,0 +1,16 @@
+AMPLIACION:
+
+Asistencia:
+
+id_asistencia
+id_estudiante
+clave_asignatura
+fecha
+estado
+
+Asignaturas:
+
+id_asignatura
+nombre
+descripcion
+
