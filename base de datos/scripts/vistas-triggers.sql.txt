@@ -1,41 +1,44 @@
-CREATE VIEW Vista_Cursos_Estudiantes AS
+VISTAS:
+
+1.-
+REATE VIEW Vista_Cursos_Estudiantes AS
 SELECT 
     e.id_estudiante,
     e.nombre AS nombre_estudiante,
-    e.apellido AS apellido_estudiante,
+    c.id_curso,
     c.nombre_curso,
-    m.año_escolar,
-    cl.fecha,
-    cl.hora
+    cl.fecha AS fecha_clase,
+    cl.hora AS hora_clase
 FROM 
-    Estudiantes e
+    Matricula m
 JOIN 
-    Matriculas m ON e.id_estudiante = m.id_estudiante
+    Clase cl ON m.id_matricula = cl.id_matricula
 JOIN 
-    Curso c ON m.año_escolar = c.anio_escolar
+    Curso c ON m.id_curso = c.id_curso
 JOIN 
-    Clases cl ON e.id_estudiante = cl.id_estudiante;
-    
-    CREATE VIEW Vista_Clases_Profesores AS
+    Estudiante e ON m.id_estudiante = e.id_estudiante;
+
+2.-
+CREATE VIEW Vista_Clases_Profesores AS
 SELECT 
     p.id_profesor,
     p.nombre AS nombre_profesor,
-    p.apellido AS apellido_profesor,
-    c.nombre_curso,
-    c.grado,
-    c.anio_escolar
+    cl.id_clase,
+    cl.fecha AS fecha_clase,
+    cl.hora AS hora_clase
 FROM 
-    Profesores p
+    Profesor p
 JOIN 
-    Curso c ON p.id_profesor = c.id_profesor;
-    
-DELIMITER //
+    Clase cl ON p.id_profesor = cl.id_profesor;
 
-CREATE TRIGGER Actualizar_Ultima_Actualizacion
-BEFORE UPDATE ON Estudiantes
+TRIGGER:
+
+1.-
+ALTER TABLE Estudiante ADD COLUMN fecha_ultima_actualizacion DATETIME;
+
+CREATE TRIGGER Actualizar_Fecha_Ultima_Actualizacion
+BEFORE UPDATE ON Estudiante
 FOR EACH ROW
 BEGIN
-    SET NEW.ultima_actualizacion = NOW();
+    SET NEW.fecha_ultima_actualizacion = NOW();
 END;
-
-//
